@@ -1,0 +1,251 @@
+<html>
+<head>
+<meta http-equiv="refresh" content="60; url=/%room%" name=viewport content="width=device-width, initial-scale=1">
+<style type="text/css">
+
+body {
+   width: 600px;
+	height: 1024px;
+	/*text-align: center;*/
+	margin:0 auto;
+    position: relative;
+    border:1px solid grey;
+} 
+
+.reload { font-family: Lucida Sans Unicode }
+
+/* unvisited link */
+a:link {
+    color: white;
+}
+
+/* visited link */
+a:visited {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: white;
+}
+
+/* selected link */
+a:active {
+    color: white;
+}
+
+
+#box{
+	font-family: Monospace;
+
+}
+
+#topbox{
+	width: 100%;
+	height: 35%;
+	background: linear-gradient(to bottom right,lightgreen,green);
+	box-shadow: 0px 20px 20px darkgreen;
+	position: relative;
+}
+
+#midbox{
+	width: 100%;
+	height: 30%;
+	background: linear-gradient(to bottom,green,darkgreen);
+}
+
+#bottombox{
+	width: 100%;
+	height: 35%;
+	padding-top: 10px;
+	background: linear-gradient(to bottom,black,#333333);
+}
+
+
+#button15{
+
+}
+
+#starttime{
+	position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: 580px;
+	font-size: 130px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+}
+
+
+#endtime{
+	text-align: right;
+	width: 580px;
+	font-size: 130px;
+	font-weight: bold;
+	text-align: center;
+}
+
+
+#duration{
+	position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: 100%;
+	font-size: 30px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+}
+
+#startdate{
+	text-align: right;
+	width: 580px;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+#enddate{
+	text-align: left;
+	width: 580px;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+#attendees{
+	text-align: right;
+	width: 580px;
+	font-size: 25px;
+	float: right;
+	position: absolute;
+	color: white;
+}
+
+#subject{
+	text-align: left;
+	width: 580px;
+	font-size: 35px;
+	padding-left: 20px;
+	padding-right: 0px;
+}
+
+#organizer{
+	text-align: left;
+	width: 100%;
+	font-size: 25px;
+	padding-left: 10px;
+	position: absolute;
+	top: 0%;
+	color: white;
+}
+
+#nextmeetings{
+	text-align: left;
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 0px;
+	font-size: 20px;
+	color: white;
+}
+
+#buttonsdiv{
+	text-align: center;
+	bottom: 0px;
+	position: absolute;
+	width: 580px;
+	padding-left: 20px;
+	padding-right: 0px;
+}
+
+#buttons{
+	position: relative;
+	height: 100%;
+	text-align: center;
+	height: 50px;
+	font-size: 40px;
+	font-weight: bold;
+}
+
+#arrows{
+	text-shadow: 0px 0px 20px green;
+	color: lightgreen;
+	text-align: center;
+	text-orientation: upright; 
+	font-size: 55px;
+	font-weight: bolder;
+	transform: rotate(90deg) scale(1,5);
+	opacity: 0.5;
+	position: absolute;
+	left: 0;
+	top: 35%;
+	width: 100%;
+	text-align: center;
+
+}
+
+
+#start{
+	color:white;
+	opacity: 0.1;
+	text-align: center;
+	font-size:200px;
+	font-style: bold;
+	position: absolute;
+	top:6%;
+	width:100%;
+	
+}
+
+#bis{
+	color:white;
+	opacity: 0.2;
+	text-align: center;
+	font-size:230px;
+	font-style: bold;
+	position: absolute;
+	top:37%;
+	width:100%;
+	
+}
+
+</style>	
+
+</head>
+<body>
+<div id="box">
+
+<div id="topbox">
+	<div id="organizer" style="visibility: %showroom%;">Raum gebucht von:<br> %organizer%</div>
+	<div id='attendees' style="visibility: %showattendees%;">%persons% Teilnehmer</div>
+	<div id="starttime">%starttime%</div>
+	<div id="duration">%duration%</div>
+	
+</div>
+<div id="midbox">
+	<div id="start"></div>
+	<div id="starttime">%endtime%</div>
+	<div id="bis">ENDE</div>
+</div>
+<div id="arrows">>></div>
+<div id="bottombox">
+	<div id="nextmeetings">
+		%nextmeeting%<br><br>
+		%nextmeeting2% <br>
+
+<table width="100%" id="buttonsdiv">
+	<tr>
+		<td id="buttons"><a href="/%room%/create/15">15Min</a></td>
+		<td id="buttons"><a href="/%room%/create/30">30Min</a></td>
+		<td id="buttons"><a href="/%room%/create/60">60Min</a></td>
+	</tr>
+</table>
+
+</div>
+
+</div>
+<center><a href="/%room%">letzte Aktualisierung: %lastupdate%</a></center>
+
+</body>
+</html>
