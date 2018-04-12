@@ -14,3 +14,14 @@ setup:
 * add credentials of a service user which has read/write to the conference room mailboxes
 * add your default mail domain
 * (hack) add default room in main.ruby
+
+require:
+* require 'viewpoint'
+* require 'pp'
+* require 'time'
+* require 'rubygems'
+* require 'sinatra'
+
+default port "9393"
+
+http://ip:port/room/confroom1 (room address "confroom1@domain"
