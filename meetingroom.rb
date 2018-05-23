@@ -4,6 +4,7 @@ require 'pp'
 require 'time'
 require 'rubygems'
 require 'sinatra'
+
 include Viewpoint::EWS
 load './credentials.rb'
 
@@ -11,7 +12,7 @@ set :bind, '0.0.0.0'
 set :port, 9393
 
 get '/' do	
-  outbuffer=retrieveews("xxxx") # default room, xxxx@domain.de
+  outbuffer=retrieveews("Saal_Elbblick") # default room
 	outbuffer
 end
 
@@ -28,7 +29,7 @@ get '/room/:roomname/create/:minutes' do
 end
 
 get '/create/:minutes' do
-	createMeeting(params[:minutes].to_i, "xxxx" + Domain)
+	createMeeting(params[:minutes].to_i, "Saal_Elbblick" + Domain)
 	outbuffer=retrieveews()
 	outbuffer
 end
@@ -56,6 +57,15 @@ end
 
 def getmeetingstring(cal, subjectstring)
 	return (cal.start.strftime("%H:%M")+'-'+cal.end.strftime("%H:%M")+' / '+cal.start.strftime("%F")+' :<br> '+cal.organizer.name+' ('+cal.required_attendees.count.to_s+' Teilnehmer)<br>'+subjectstring)
+end
+
+def humanize secs
+  [[60, :Minuten], [24, :Stunden], [1000, :Tage]].map{ |count, name|
+    if secs > 0
+      secs, n = secs.divmod(count)
+      "#{n.to_i} #{name}"
+    end
+  }.compact.reverse.join(' ')
 end
 
  
@@ -101,23 +111,27 @@ def retrieveews(roomname)
 		pp cal.start.rfc3339()
 		pp cal.end.rfc3339()
 		pp timenow.rfc3339()
+		pp cal.start.to_time.to_i - timenow.to_time.to_i
 		
 		# => DEBUG
 
 		if !cal.subject.nil? && index==0
 			if  timenow < cal.end &&  timenow < cal.start
-				buf.sub! '%starttime%', 'FREI'
-                                buf.sub! '%startdate%', ''
-                                buf.sub! '%endtime%', cal.start.strftime("%H:%M")
-                                #buf.sub! '%enddate%', ''
-                                buf.sub! '%persons%', "0"
-                                buf.sub! '%organizer%', '-'
-                                buf.sub! '%subject%', 'Raum ist frei'
+					buf.sub! '%starttime%', 'FREI'
+	                buf.sub! '%startdate%', ''
+	                buf.sub! '%endtime%', cal.start.strftime("%H:%M")
+	                #buf.sub! '%enddate%', ''
+	                buf.sub! '%persons%', "0"
+	                buf.sub! '%organizer%', '-'
+	                buf.sub! '%subject%', 'Raum ist frei'
+	                buf.sub! '%showroom%', 'hidden'
+	                buf.sub! '%showattendees%', 'hidden'
+	                buf.sub! '%duration%', 'noch<br>'+humanize((cal.start.to_time.to_i - timenow.to_time.to_i) / 60)
 				if cal.recurring? == true
               		subjectbuf= 'Besprechung (Serientermin)'
           	 	else
                 	subjectbuf= 'Besprechung'
-           		 end
+           		end
 
 				buf.sub! '%nextmeeting%', (cal.start.strftime("%H:%M")+'-'+cal.end.strftime("%H:%M")+' / '+cal.start.strftime("%F")+' :<br> '+cal.organizer.name+' ('+cal.required_attendees.count.to_s+' Teilnehmer)<br>'+subjectbuf)
 				roomfree=true
@@ -125,9 +139,10 @@ def retrieveews(roomname)
 				buf.gsub! 'lightgreen', 'tomato'
 				buf.gsub! 'green', 'red'
 				buf.gsub! 'darkgreen', 'darkred'
-				buf.sub! '%starttime%', cal.start.strftime("%H:%M")
+				buf.sub! '%starttime%', 'BELEGT'
 				buf.sub! '%endtime%', cal.end.strftime("%H:%M")
 				buf.sub! '%persons%', cal.required_attendees.count.to_s
+				buf.sub! '%duration%', 'noch<br>'+humanize((cal.end.to_time.to_i - timenow.to_time.to_i) / 60)
 			end
 			
 			if cal.recurring? == true
@@ -189,6 +204,8 @@ def retrieveews(roomname)
 	buf.sub! '%subject%',''
 	buf.sub! '%persons%','0'
 	buf.sub! '%organizer%','-'
+	
+	buf.sub! '%duration%', ''
 	buf.sub! '%lastupdate%', DateTime.now().strftime("%F/%H:%M:%S")
 	buf.gsub! '%room%',''
 	return buf
