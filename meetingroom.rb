@@ -8,6 +8,7 @@ require 'sinatra'
 include Viewpoint::EWS
 load './credentials.rb'
 
+set :protection, :except => :frame_options
 set :bind, '0.0.0.0'
 set :port, 9393
 
@@ -17,14 +18,19 @@ get '/' do
 end
 
 get '/room/:roomname' do
-	outbuffer=retrieveews(params[:roomname])
+	outbuffer=retrieveews(params[:roomname],'template2punkt0.html')
+	outbuffer
+end
+
+get '/status/:roomname' do
+	outbuffer=retrieveews(params[:roomname],'templatestatus.html')
 	outbuffer
 end
 
 get '/room/:roomname/create/:minutes' do
 	
 	createMeeting(params[:minutes].to_i, params[:roomname] + Domain)
-	outbuffer=retrieveews(params[:roomname])
+	outbuffer=retrieveews(params[:roomname],'template2punkt0.html')
 	outbuffer
 end
 
@@ -69,8 +75,8 @@ def humanize secs
 end
 
  
-def retrieveews(roomname)
-	buf = File.read('template2punkt0.html')
+def retrieveews(roomname, template)
+	buf = File.read(template)
 	buf.gsub! '%room%', 'room/'+roomname
 
 	cli=connectews()
