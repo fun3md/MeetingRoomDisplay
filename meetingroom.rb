@@ -127,6 +127,12 @@ def retrieveews(roomname)
 	                buf.sub! '%showroom%', 'hidden'
 	                buf.sub! '%showattendees%', 'hidden'
 	                buf.sub! '%duration%', 'noch<br>'+humanize((cal.start.to_time.to_i - timenow.to_time.to_i) / 60)
+	            if ((cal.start.to_time.to_i - timenow.to_time.to_i)/60) < 59
+ 	                buf.gsub! 'lightgreen', 'gold'
+					buf.gsub! 'green', 'goldenrod'
+					buf.gsub! 'darkgreen', 'darkgoldenrod'
+				end
+
 				if cal.recurring? == true
               		subjectbuf= 'Besprechung (Serientermin)'
           	 	else
