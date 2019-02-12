@@ -15,11 +15,8 @@ set :bind, '0.0.0.0'
 set :port, 9393
 
 get '/' do	
-	if ENV['DEFAULT_ROOM'].is_set?
-		outbuffer=retrieveews(ENV['DEFAULTROOM'],'template2punkt0.html' ) # default room
-	else
-  		outbuffer=retrieveews("Saal_Elbblick",'template2punkt0.html' ) # default room
-	outbuffer
+	outbuffer=retrieveews(ENV['DEFAULTROOM'],'template2punkt0.html' ) # default room
+		outbuffer
 end
 
 get '/room/:roomname' do
