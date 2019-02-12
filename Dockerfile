@@ -5,6 +5,5 @@ RUN bundle config
 COPY . .
 RUN bundle install
 
-
 EXPOSE 9393
-CMD ["ruby meetingroom.rb"]
+ENTRYPOINT ["ruby", "meetingroom.rb"]

@@ -1,0 +1,24 @@
+version: "3"
+services:
+  server:
+    image: srvnexus01.icubic.icubic.de/meetingroomdisplay:latest
+    environment:
+      - EWS_ENDPOINT=https://exchange.icubic.com/ews/Exchange.asmx
+      - EWS_USER=svc-ewsuser-conf
+      - EWS_PASS=
+      - EWS_DOMAIN=@icubic.de
+      - DEFAULTROOM=Domblick
+    restart: always
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.port=9393"
+        - "traefik.docker.network=traefik-net"
+        - "traefik.frontend.rule=Host:mrd.docker.local"
+        - "traefik.enable=true"
+    networks:
+      - traefik-net
+
+networks:
+  traefik-net:
+    external: true
