@@ -8,12 +8,17 @@ require 'sinatra'
 include Viewpoint::EWS
 load './credentials.rb'
 
+
+
 set :protection, :except => :frame_options
 set :bind, '0.0.0.0'
 set :port, 9393
 
 get '/' do	
-  outbuffer=retrieveews("Saal_Elbblick") # default room
+	if ENV['DEFAULT_ROOM'].is_set?
+		outbuffer=retrieveews(ENV['DEFAULTROOM'],'template2punkt0.html' ) # default room
+	else
+  		outbuffer=retrieveews("Saal_Elbblick",'template2punkt0.html' ) # default room
 	outbuffer
 end
 
@@ -41,7 +46,7 @@ get '/create/:minutes' do
 end
 
 def connectews()
-	cli = Viewpoint::EWSClient.new Endpoint, User, Pass
+	cli = Viewpoint::EWSClient.new Endpoint, User, Pass, http_opts: {ssl_verify_mode: 0}
 	# => to get all available time zones
 	#pp cli.ews.get_time_zones(full=false,ids=nil)
 	cli.set_time_zone("W. Europe Standard Time")

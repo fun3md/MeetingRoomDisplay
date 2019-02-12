@@ -4,8 +4,8 @@
 <style type="text/css">
 
 body {
-   /*width: 600px;
-	height: 1024px;*/
+   width: 600px;
+	height: 1024px;
 	/*text-align: center;*/
 	margin:0 auto;
     position: relative;
@@ -69,9 +69,9 @@ a:active {
 #starttime{
 	position: relative;
     top: 50%;
-    /*left: 50%;*/
-    transform: translate(0%, -50%);
-	width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	width: 580px;
 	font-size: 130px;
 	font-weight: bold;
 	color: white;
@@ -80,7 +80,8 @@ a:active {
 
 
 #endtime{
-	width: 100%;
+	text-align: right;
+	width: 580px;
 	font-size: 130px;
 	font-weight: bold;
 	text-align: center;
@@ -89,8 +90,9 @@ a:active {
 
 #duration{
 	position: absolute;
-    top: 72%;
-    transform: translate(0%, -50%);
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 	width: 100%;
 	font-size: 30px;
 	font-weight: bold;
@@ -114,7 +116,7 @@ a:active {
 
 #attendees{
 	text-align: right;
-	width: 100%;
+	width: 580px;
 	font-size: 25px;
 	float: right;
 	position: absolute;
@@ -150,7 +152,7 @@ a:active {
 
 #buttonsdiv{
 	text-align: center;
-	bottom: 20px;
+	bottom: 0px;
 	position: absolute;
 	width: 580px;
 	padding-left: 20px;
@@ -205,15 +207,8 @@ a:active {
 	position: absolute;
 	top:37%;
 	width:100%;
-}
-#lastupdate{
-	text-align: center;
-	bottom: 0px;
-	position: absolute;
-
-}
 	
-
+}
 
 </style>	
 
@@ -245,13 +240,12 @@ a:active {
 		<td id="buttons"><a href="/%room%/create/30">30Min</a></td>
 		<td id="buttons"><a href="/%room%/create/60">60Min</a></td>
 	</tr>
-	
 </table>
 
 </div>
-<a href="/%room%" id="lastupdate">letzte Aktualisierung: %lastupdate%</a>
-</div>
 
+</div>
+<center><a href="/%room%">letzte Aktualisierung: %lastupdate%</a></center>
 
 </body>
 </html>
