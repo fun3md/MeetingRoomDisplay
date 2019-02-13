@@ -1,13 +1,13 @@
 version: "3"
 services:
   server:
-    image: srvnexus01.icubic.icubic.de/meetingroomdisplay:latest
+    image: local.repo/meetingroomdisplay:latest
     environment:
-      - EWS_ENDPOINT=https://exchange.icubic.com/ews/Exchange.asmx
-      - EWS_USER=svc-ewsuser-conf
+      - EWS_ENDPOINT=https://exchange.domain.xxx/ews/Exchange.asmx
+      - EWS_USER=svc-exchange-user
       - EWS_PASS=
-      - EWS_DOMAIN=@icubic.de
-      - DEFAULTROOM=Domblick
+      - EWS_DOMAIN=@domain.de
+      - DEFAULTROOM=Conference1
     restart: always
     deploy:
       replicas: 1
