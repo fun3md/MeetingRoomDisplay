@@ -8,7 +8,16 @@ features:
 * display upcoming meetings with number of participants and the meeting owner
 * tested with amazon fire tab and and the app "kiosk browser"
 
-setup:
+SETUP for Docker:
+set Enviroment variables
+
+"EWS_USER" = e.g. "password"
+"EWS_PASS" = e.g. "service-user"
+"EWS_ENDPOINT" = e.g. "https://exchange.company.com/ews/Exchange.asmx"
+"EWS_DOMAIN" = e.g. "@company.com"
+"DEFAULTROOM" = e.g. "Meetingroom1" // mailbox address of the default meetingroom minus domain address
+
+setup (manual install):
 
 * add URL to EWS in credentials file
 * add credentials of a service user which has read/write to the conference room mailboxes
