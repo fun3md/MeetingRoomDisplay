@@ -11,11 +11,13 @@ features:
 SETUP for Docker:
 set Enviroment variables
 
-"EWS_USER" = e.g. "password"
-"EWS_PASS" = e.g. "service-user"
-"EWS_ENDPOINT" = e.g. "https://exchange.company.com/ews/Exchange.asmx"
-"EWS_DOMAIN" = e.g. "@company.com"
-"DEFAULTROOM" = e.g. "Meetingroom1" // mailbox address of the default meetingroom minus domain address
+* "EWS_USER" = e.g. "password"
+* "EWS_PASS" = e.g. "service-user"
+* "EWS_ENDPOINT" = e.g. "https://exchange.company.com/ews/Exchange.asmx"
+* "EWS_DOMAIN" = e.g. "@company.com"
+* "DEFAULTROOM" = e.g. "Meetingroom1" // mailbox address of the default meetingroom minus domain address
+
+expose port 9393 to desired external port
 
 setup (manual install):
 
