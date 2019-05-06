@@ -77,7 +77,10 @@ def humanize secs
 end
 
  
-def retrieveews(roomname, template)
+def retrieveews(roomname, template),
+	Encoding.default_external = Encoding::UTF_8
+	Encoding.default_internal = Encoding::UTF_8
+
 	buf = File.read(template)
 	buf.gsub! '%room%', 'room/'+roomname
 
